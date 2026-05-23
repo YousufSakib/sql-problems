@@ -11,13 +11,23 @@ Problem Statement:
 */
 
 
-SELECT h.hacker_id, h.name
-FROM Hackers h JOIN Submissions s ON s.hacker_id = h.hacker_id
-WHERE s.score = ( 
-    select d.score from Difficulty d join Challenges c 
-    on d.difficulty_level = c.difficulty_level
-    where c.challenge_id = s.challenge_id
-    ) 
-group by h.hacker_id, h.name
-having count(s.challenge_id) > 1
-order by count(s.challenge_id) DESC, h.hacker_id ASC;
+SELECT s.hacker_id,
+       h.name
+FROM
+(
+    SELECT hacker_id,
+           challenge_id,
+           MAX(score) AS score
+    FROM Submissions
+    GROUP BY hacker_id, challenge_id
+) s
+JOIN Challenges c
+    ON s.challenge_id = c.challenge_id
+JOIN Difficulty d
+    ON c.difficulty_level = d.difficulty_level
+JOIN Hackers h
+    ON s.hacker_id = h.hacker_id
+WHERE s.score = d.score
+GROUP BY s.hacker_id, h.name
+HAVING COUNT(*) > 1
+ORDER BY COUNT(*) DESC, s.hacker_id ASC;
