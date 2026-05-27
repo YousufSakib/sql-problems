@@ -11,17 +11,15 @@ Problem Statement:
 
 */
 
-with student_grades as (
-    select
-        students.name,
-        students.marks,
-        grades.grade
-    from students
-    join grades on students.marks between grades.min_mark and grades.max_mark
-)
-select
-    (case when grade < 8 then NULL else name end) as name,
-    grade,
-    marks
-from student_grades
-order by grade desc, name asc, marks asc
+
+    SELECT 
+    (CASE 
+        WHEN G.Grade < 8 THEN NULL
+        ELSE S.Name 
+    END) AS Name,
+    G.Grade,
+    S.Marks
+    FROM Students S
+        INNER JOIN Grades G
+    ON S.Marks >= G.Min_Mark AND S.Marks <= G.Max_Mark
+    ORDER BY G.Grade DESC, S.NAME ASC, S.Marks ASC
