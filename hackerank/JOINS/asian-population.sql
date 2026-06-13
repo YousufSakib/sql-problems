@@ -18,8 +18,6 @@ Problem Statement:
 */
 
 
-
-
 SELECT SUM(CITY.POPULATION)
 FROM CITY
 JOIN COUNTRY
