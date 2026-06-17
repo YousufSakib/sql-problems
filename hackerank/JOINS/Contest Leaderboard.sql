@@ -9,8 +9,27 @@ Problem Statement:
 
 */
 
-Mysql
+With Scores AS (
+    SELECT hacker_id, SUM(max_score) AS total_score
 
-with maxscores as ( select s.hacker_id,name,challenge_id,max(score) as max_score from submissions s join hackers h on h.hacker_id = s.hacker_id group by s.hacker_id,challenge_id,name )
+    FROM (
+        SELECT hacker_id, challenge_id, MAX(score) AS max_score
 
-select hacker_id,name, sum(max_score) as total_score from maxscores group by hacker_id,name having sum(max_score) >0 order by sum(max_score) desc,hacker_id asc
+        FROM Submissions 
+
+        GROUP BY hacker_id, challenge_id
+    ) x
+
+    GROUP BY hacker_id
+)
+
+
+SELECT s.hacker_id, h.name, total_score
+
+FROM Scores s 
+    INNER JOIN Hackers h 
+    ON s.hacker_id = h.hacker_id
+
+WHERE s.total_score > 0
+
+ORDER BY s.total_score DESC, s.hacker_id
