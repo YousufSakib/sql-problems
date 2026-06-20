@@ -8,7 +8,7 @@
 WITH RankedData AS (
     SELECT LAT_N,
         ROW_NUMBER() OVER(ORDER BY LAT_N) AS row_num,
-        COUNT(*) OVER() total_cnt
+        COUNT(*) OVER() AS total_cnt
     FROM STATION
 )
 
