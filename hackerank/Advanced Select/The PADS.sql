@@ -20,3 +20,5 @@ SELECT CONCAT("There are a total of ", COUNT(*), " ", LOWER(Occupation), "s.")
 FROM Occupations
 GROUP BY Occupation
 ORDER BY COUNT(*), Occupation
+
+
