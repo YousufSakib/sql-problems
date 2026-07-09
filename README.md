@@ -2,7 +2,7 @@
 
 Collection of solved SQL and database problems from:
 
-- HackerRank
+- Hacker Rank. 
 - LeetCode
 - SQLZoo
 - PostgreSQL Exercises
