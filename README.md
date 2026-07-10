@@ -3,7 +3,7 @@
 Collection of solved SQL and database problems from:
 
 - Hacker Rank. 
-- LeetCode
+- LeetCode.
 - SQLZoo
 - PostgreSQL Exercises
 
